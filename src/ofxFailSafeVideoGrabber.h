@@ -43,7 +43,7 @@ public:
 	bool isFrameNew();
 
 	ofTexture& getTextureReference();
-	unsigned char* getPixels();
+	ofPixels & getPixels();
 	
 	ofVideoGrabber * getVideoGrabber();
 	ofVideoPlayer * getVideoPlayer();

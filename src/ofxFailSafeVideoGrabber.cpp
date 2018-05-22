@@ -75,7 +75,7 @@ void ofxFailSafeVideoGrabber::arrangeImage(){
 void ofxFailSafeVideoGrabber::updateImage(){
 
 	int totalPixels = w * h ;
-	unsigned char * pixels = image.getPixels();
+    ofPixels& pixels = image.getPixels();
 	for (int i = 0; i < totalPixels; i++){
 		unsigned char val = ofRandom(255);
 		pixels[i*3] = pixels[i*3+1] = pixels[i*3+2] = val;
@@ -140,9 +140,10 @@ ofTexture& ofxFailSafeVideoGrabber::getTextureReference(){
 	}
 }
 
-unsigned char* ofxFailSafeVideoGrabber::getPixels(){
+ofPixels & ofxFailSafeVideoGrabber::getPixels(){
 	switch (what) {
-		case NOTHING: return NULL;
+        // Hacky fix here, not sure how to solve properly
+		case NOTHING: return image.getPixels();
 		case CAMERA: return camera.getPixels();
 		case MOVIE: return movie.getPixels();
 		case IMAGE: return image.getPixels();
